@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <title>CoMuTy|{% block title %}{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/5.0.0/normalize.css">
+            <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+            <link rel="stylesheet" type="text/css" href="/css/jcv_style.css">
+            <link rel="stylesheet" type="text/css" href="/css/main.css">
+        {% block css %}
+        {% endblock %}
+            <script defer src="/js/BBtoHtml.js"></script>
+            {#<script defer src="/socket.io/socket.io.js"></script>#}
+            {#<script defer src="/js/global.js"></script>#}
+            <script defer src="/js/clientApp.js"></script>
+        {% block script %}
+        {% endblock %}
+    </head>
+<body>
+    <header class="header">
+        <div class="logo box center y_center">
+            <a href="/">
+                <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+                <h1>Les TOP Communautés</h1>
+            </a>
+        </div>
+        <nav class=" box center y_center multiline">
+            <a href="/" class="btn white">Home</a>
+            <a href="#" class="btn white">Ajouter une communauté</a>
+            <a href="mailto:jcvolan@gmail.com" class="btn white">Contact</a>
+        </nav>
+    </header>
+    <section>
+        <form id="search_form" class="box center" action="/" method="get">
+            <div class="search_warp shadow_box">
+                <input class="search" type="text" name="search" placeholder="Rechercher un Thème">
+                <input class="hide" type="submit" name="search_submit" id="search_submit">
+                <label class="fa fa-search fa-lg search_submit" aria-hidden="true" for="search_submit"></label>
+            </div>
+        </form>
+    </section>
+    <section class="content">
+        {% block content %}
+        {% endblock %}
+    </section>
+    <footer class="footer">
+        <div class="box auto">
+            <a href="/" class="center_text">A Propos</a>
+            <a href="/" class="center_text">Contact</a>
+            <a href="/" class="center_text">Term</a>
+        </div>
+    </footer>
+
+</body>
+</html>
+
