@@ -1,3 +1,46 @@
-community_homepage:
+c_homepage:
     path:     /
     defaults: { _controller: CommunityBundle:Home:index }
+
+#essentials methods for blog
+c_blog_view_all:
+
+    path:     /blog/
+    defaults: { _controller: CommunityBundle:Blog:viewAll }
+    method: [GET]
+
+c_blog_view_one:
+
+    path:     /blog/{id}
+    defaults: { _controller: CommunityBundle:Blog:view }
+    method: [GET]
+
+c_api_blog_post:
+
+    path:     /api/blog/
+    defaults: { _controller: CommunityBundle:Blog:post }
+    method: [POST]
+
+c_api_blog_get_all:
+
+    path:     /api/blog/
+    defaults: { _controller: CommunityBundle:Blog:getAll }
+    method: [GET]
+
+c_api_blog_get_one:
+
+    path:     /api/blog/{id}
+    defaults: { _controller: CommunityBundle:Blog:get }
+    method: [GET]
+
+c_api_blog_put:
+
+    path:     /api/blog/{id}
+    defaults: { _controller: CommunityBundle:Blog:put }
+    method: [PUT]
+
+c_api_blog_delete:
+
+    path:     /api/blog/{id}
+    defaults: { _controller: CommunityBundle:Blog:delete }
+    method: [DELETE]
