@@ -4,9 +4,11 @@ use Symfony\Component\Routing\Route;
 
 $collection = new RouteCollection();
 //CUSTOM ROUTES
-$collection->add('c_homepage', new Route('/', array(
+$collection->add('c_homepage', new Route('/',
+    array(
     '_controller' => 'CommunityBundle:Home:index',
-)));
+    )
+));
 
 //DEFAULT ROUTING LIKE REST API
 $routes = [
@@ -16,30 +18,30 @@ $routes = [
     ]
 ];
 foreach($routes as $route){
-    $name = $route['name'];
-    $n = strtolower($name);
-    $bundle = $route['bundle'];
-    $b = strtolower($bundle);
+    $Name = $route['name'];
+    $n = strtolower($Name);
+    $Bundle = $route['bundle'];
+    $b = strtolower($Bundle);
     $collection->add($b.'_'.$n.'_view_all',new Route('/'.$n.'/',array(
-        '_controller' => $bundle.':'.$name.':viewAll',
+        '_controller' => $Bundle.':'.$Name.':viewAll',
     ),array(),array(),'',array(),array('GET')));
     $collection->add($b.'_'.$n.'_view_one',new Route('/'.$n.'/{id}',array(
-        '_controller' => $bundle.':'.$name.':viewOne',
+        '_controller' => $Bundle.':'.$Name.':viewOne',
     ),array(),array(),'',array(),array('GET')));
     $collection->add($b.'_'.$n.'_api_post',new Route('api/'.$n.'/',array(
-        '_controller' => $bundle.':'.$name.':post',
+        '_controller' => $Bundle.':'.$Name.':post',
     ),array(),array(),'',array(),array('POST')));
     $collection->add($b.'_'.$n.'_api_get_all',new Route('api/'.$n.'/',array(
-        '_controller' => $bundle.':'.$name.':getAll',
+        '_controller' => $Bundle.':'.$Name.':getAll',
     ),array(),array(),'',array(),array('GET')));
     $collection->add($b.'_'.$n.'_api_get_one',new Route('api/'.$n.'/{id}',array(
-        '_controller' => $bundle.':'.$name.':getOne',
+        '_controller' => $Bundle.':'.$Name.':getOne',
     ),array(),array(),'',array(),array('GET')));
     $collection->add($b.'_'.$n.'_api_put',new Route('api/'.$n.'/{id}',array(
-        '_controller' => $bundle.':'.$name.':put',
+        '_controller' => $Bundle.':'.$Name.':put',
     ),array(),array(),'',array(),array('PUT')));
     $collection->add($b.'_'.$n.'_api_delete',new Route('api/'.$n.'/{id}',array(
-        '_controller' => $bundle.':'.$name.':delete',
+        '_controller' => $Bundle.':'.$Name.':delete',
     ),array(),array(),'',array(),array('DELETE')));
 }
 return $collection;

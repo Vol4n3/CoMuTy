@@ -2,6 +2,7 @@
 
 namespace JCV\CommunityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,10 +21,16 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var Blogs
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
+     */
+    private $blogs;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->features = new ArrayCollection();
     }
 }
 
