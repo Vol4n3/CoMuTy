@@ -70,6 +70,26 @@ class BBToHtml extends \Twig_Extension
                 }
             ),
             array(
+                "regex" => "/\[soundcloud\=(https?\:\/\/[\-_a-z0-9.\/]*)\]/im",
+                "replace" => function($res) {
+                    return '<div style="position: relative;" >'
+                        .'<img style="display: block;width: 100%;height: auto;" src="data:image/gif;base64,R0lGODlhEAAJAIAAAP///wAAACH5BAEAAAAALAAAAAAQAAkAAAIKhI+py+0Po5yUFQA7"/>'
+                        .'<iframe  style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" class="youtube" type="text/html" src="https://w.soundcloud.com/player/?url='
+                        . urlencode($res[1]) . '?&color=black_white&visual=true&show_comments=true&hide_related=true&show_reposts=false" frameborder="0" scrolling="no"></iframe>'
+                        .'</div>';
+                }
+            ),
+            array(
+                "regex" => "/\[vimeo\=([-_a-z0-9]*)\]/im",
+                "replace" => function($res) {
+                    return '<div style="position: relative;">'
+                        .'<img style="display: block;width: 100%;height: auto;" src="data:image/gif;base64,R0lGODlhEAAJAIAAAP///wAAACH5BAEAAAAALAAAAAAQAAkAAAIKhI+py+0Po5yUFQA7"/>'
+                        .'<iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" class="youtube" type="text/html" width="640" height="360" src="https://player.vimeo.com/video/'
+                        . $res[1] . '?badge=0" frameborder="0" allowfullscreen></iframe>'
+                        .'</div>';
+                }
+            ),
+            array(
                 "regex" => "/\[dailymotion\=([-_a-z0-9]*)\]/im",
                 "replace" => function($res) {
                     return '<div style="position: relative;">'
@@ -81,11 +101,17 @@ class BBToHtml extends \Twig_Extension
                 }
             ),
             array(
+                "regex" => "/\[img\=(https?\:\/\/[:\-_a-z0-9.\/]*)[?]*?\]/im",
+                "replace" => function($res) {
+                    return '<img style="display: block; width: 100%;height: auto;" src="'.$res[1].'">';
+                }
+            ),
+            array(
                 "regex" => "/\[wrap=([0-9]{1,3})\](.*?)\[\/wrap\]/im",
                 "replace" => function($res) {
                     $number = intval($res[1]);
                     $number = $number > 100 ? $number = 100 : $number;
-                    return '<div style="width:' . $number . '%;display:inline-block;"> '. $res[2] . '</div>';
+                    return '<div style="width:' . $number . '%;display:inline-block;vertical-align:middle;"> '. $res[2] . '</div>';
                 }
             ),
             array(
