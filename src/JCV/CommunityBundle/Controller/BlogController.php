@@ -9,6 +9,7 @@
 namespace JCV\CommunityBundle\Controller;
 
 use JCV\CommunityBundle\Entity\Blog;
+use JCV\CommunityBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -16,6 +17,11 @@ class BlogController extends Controller implements DefaultRoutingControllerInter
 
     public function viewAllAction(request $req)
     {
+        $user = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CommunityBundle:User')
+            ->find(1);
+        dump($user);
         return $this->render('CommunityBundle:Home:index.html.twig');
     }
 
@@ -26,14 +32,39 @@ class BlogController extends Controller implements DefaultRoutingControllerInter
 
     public function postAction(request $req)
     {
-        //todo: Finish post meth
-        $jsonPost = $req->getContent();
-        $arrayPost = json_decode($jsonPost);
+        /**
+         * @var User $user
+         */
+        //$user = $this->getUser();
+        //$user = $this->getUser();
+        $user = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CommunityBundle:User')
+            ->find(1);
+        if($user === null){
+            return $this->json(array("res" => "must be log"));
+        }
+/*        if($req->getContentType() != "json"){
+            return $this->json(array("res" => "post must be json"));
+        }*/
+
+
+        $jsonPost = $req->request->all();
+        $type = $req->getContentType();
+        return $this->json(array("res" => $jsonPost,"type" => $type));
+        $jsonDecode = json_decode($jsonPost,true);
         $blog = new Blog();
-        //$blog->setUser();
+        $blog->setTitle($jsonDecode["title"]);
+        $blog->setDescription($jsonDecode["description"]);
+        $blog->setUser($user);
         $blog->setCreatedAt(new \DateTime("now"));
-        $blog->setContent($arrayPost["content"]);
-        return $this->json(array("res" => "success"));
+        $blog->setUpdatedAt(new \DateTime("now"));
+        $blog->setPosition(1);
+        $blog->setContent($jsonDecode["content"]);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($blog);
+        $em->flush();
+        return $this->json(array("res" => "ok"));
     }
 
     public function getAllAction(request $req)
