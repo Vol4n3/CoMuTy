@@ -101,9 +101,9 @@ class BBToHtml extends \Twig_Extension
                 }
             ),
             array(
-                "regex" => "/\[img\=(https?\:\/\/[:\-_a-z0-9.\/]*)[?]*?\]/im",
+                "regex" => "/\[img=((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\]\s]+)[\a-z]*?(#[\w\-]+)?\]/im",
                 "replace" => function($res) {
-                    return '<img style="display: block; width: 100%;height: auto;" src="'.$res[1].'">';
+                    return '<img style="display: block; width: 100%;height: auto;" src="'.$res[2].'://'.$res[3].$res[4].$res[6].'">';
                 }
             ),
             array(
