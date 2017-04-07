@@ -32,19 +32,22 @@
             <a href="mailto:jcvolan@gmail.com" class="btn white">Contact</a>
         </nav>
     </header>
-    <section>
-        <form id="search_form" class="box center" action="/" method="get">
-            <div class="search_warp shadow_box">
-                <input class="search" type="text" name="search" placeholder="Rechercher un Thème">
-                <input class="hide" type="submit" name="search_submit" id="search_submit">
-                <label class="fa fa-search fa-lg search_submit" aria-hidden="true" for="search_submit"></label>
-            </div>
-        </form>
-    </section>
-    <section class="content">
-        {% block content %}
-        {% endblock %}
-    </section>
+    <main>
+        <section>
+            <form id="search_form" class="box center" action="/" method="get">
+                <div class="search_warp shadow_box">
+                    <input class="search" type="text" name="search" placeholder="Rechercher un Thème">
+                    <input class="hide" type="submit" name="search_submit" id="search_submit">
+                    <label class="fa fa-search fa-lg search_submit" aria-hidden="true" for="search_submit"></label>
+                </div>
+            </form>
+        </section>
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+
+    </main>
     <footer class="footer">
         <div class="box auto">
             <a href="/" class="center_text">A Propos</a>

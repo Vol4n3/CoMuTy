@@ -35,8 +35,7 @@ class BlogController extends Controller implements DefaultRoutingControllerInter
         /**
          * @var User $user
          */
-        //$user = $this->getUser();
-        //$user = $this->getUser();
+
         $user = $this->getDoctrine()
             ->getManager()
             ->getRepository('CommunityBundle:User')
@@ -44,10 +43,6 @@ class BlogController extends Controller implements DefaultRoutingControllerInter
         if($user === null){
             return $this->json(array("res" => "must be log"));
         }
-/*        if($req->getContentType() != "json"){
-            return $this->json(array("res" => "post must be json"));
-        }*/
-
 
         $jsonPost = $req->request->all();
         $type = $req->getContentType();

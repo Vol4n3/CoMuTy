@@ -1,14 +1,14 @@
 {% extends 'CommunityBundle:Home:layout.html.twig' %}
 {% block content %}
+    {% for blog in blogs %}
     <article>
-        <header></header>
-        <div class="bbParses"></div>
-        <div>{{ "
-        [wrap=50][youtube=UIrqWunjuEc][/wrap]
-        [wrap=30][img=https://i.ytimg.com/vi/Ah2TYxPJDE4/hqdefault.jpg][/wrap]
-        [wrap=20][youtube=UIrqWunjuEc][/wrap]
-        [h2]sdfsdf[/h2][h2]Trius[/h2]"|bbtohtml }}</div>
-        {#<div id="wysiwyg" contenteditable="true">[p]test[/p]</div>#}
-        <footer></footer>
+        <header>
+            <h2>{{ blog.position }}</h2>
+            <img src="{{ blog.urlBanner }}">
+            <h3>{{ blog.title }}</h3>
+        </header>
+        <p>{{ blog.description }}</p>
+        <footer><P>Communauté crée par : {{ blog.user.username }}</P></footer>
     </article>
+    {% endfor %}
 {% endblock %}

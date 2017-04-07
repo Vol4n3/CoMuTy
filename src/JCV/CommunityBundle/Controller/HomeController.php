@@ -9,6 +9,10 @@ class HomeController extends Controller
 {
     public function indexAction(Request $req)
     {
-        return $this->render('CommunityBundle:Home:index.html.twig');
+        $blogs = $this->getDoctrine()
+            ->getRepository('CommunityBundle:Blog')
+            ->findAll();
+
+        return $this->render('CommunityBundle:Home:index.html.twig',['blogs' => $blogs]);
     }
 }
